@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "161244832052",
+    "firebase_url": "https://auctionlaravel.firebaseio.com",
+    "project_id": "auctionlaravel",
+    "storage_bucket": "auctionlaravel.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:161244832052:android:08fab8fee27821ca240561",
+        "android_client_info": {
+          "package_name": "com.example.auction"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "161244832052-59qovodpd0d2c5nstgscdl6ncthm96eq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBkmvLKMz93z7kCByBhxblRDwgfNHAF1Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "161244832052-59qovodpd0d2c5nstgscdl6ncthm96eq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
