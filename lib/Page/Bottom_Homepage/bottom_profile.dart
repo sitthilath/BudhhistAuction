@@ -1,4 +1,7 @@
+import 'package:buddhistauction/Provider/store_token.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class BottomProfile extends StatefulWidget {
   @override
@@ -9,8 +12,44 @@ class BottomProfile extends StatefulWidget {
 }
 
 class _BottomProfileState extends State<BottomProfile> with AutomaticKeepAliveClientMixin {
+
+
+
+   void showAlertDialog(BuildContext context) {
+      // set up the buttons
+      Widget cancelButton = FlatButton(
+        child: Text("ຍົກເລີກ"),
+        onPressed:  () {
+          Navigator.of(context).pop();
+        },
+      );
+      Widget continueButton = FlatButton(
+        child: Text("ຕົກລົງ"),
+        onPressed:  () {
+
+        },
+      );
+      // set up the AlertDialog
+      AlertDialog alert = AlertDialog(
+        title: Text("ອອກຈາກລະບົບ"),
+        content: Text("ທ່ານຕ້ອງການອອກຈາກລະບົບ ຫຼື ບໍ່?"),
+        actions: [
+          cancelButton,
+          continueButton,
+        ],
+      );
+      // show the dialog
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return alert;
+        },
+      );
+  }
   @override
   Widget build(BuildContext context) {
+
+
     super.build(context);
     return Scaffold(
       appBar: AppBar(
@@ -29,6 +68,7 @@ class _BottomProfileState extends State<BottomProfile> with AutomaticKeepAliveCl
         backgroundColor: Colors.transparent,
       ),
       body: SingleChildScrollView(
+
         child: Container(
           margin: EdgeInsets.fromLTRB(20, 0, 0, 0),
           child: Column(
@@ -45,7 +85,9 @@ class _BottomProfileState extends State<BottomProfile> with AutomaticKeepAliveCl
                 height: 20,
               ),
               InkWell(
-                onTap: (){},
+                onTap: (){
+                  Navigator.pushNamed(context, "/profile_user");
+                },
                 child: Row(
                   children: [
                     Container(
@@ -340,6 +382,31 @@ class _BottomProfileState extends State<BottomProfile> with AutomaticKeepAliveCl
                 ),
               ),
               Divider(),
+              InkWell(
+                    onTap: (){
+                      showAlertDialog(context);
+                    },
+                    child: Row(
+                      children: [
+                        Icon(Icons.logout,color: Color.fromARGB(255, 184, 133, 13),),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('ອອກຈາກລະບົບ'),
+
+                          ],
+                        ),
+                        Spacer(),
+                        Icon(Icons.arrow_forward_ios,size: 12,color: Colors.grey,),
+                        SizedBox(width: 20),
+
+                      ],
+                    ),
+                  ),
+
 
 
             ],
@@ -347,7 +414,11 @@ class _BottomProfileState extends State<BottomProfile> with AutomaticKeepAliveCl
         ),
       ),
     );
+
+
   }
+
+
 
   @override
   // TODO: implement wantKeepAlive

@@ -117,7 +117,7 @@
 // }
 
 import 'package:buddhistauction/Page/registerpage.dart';
-import 'package:buddhistauction/Test/bezierContainer.dart';
+import 'package:buddhistauction/LoginBackground/bezierContainer.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

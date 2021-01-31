@@ -1,3 +1,5 @@
+import 'package:buddhistauction/Comment/content_detail.dart';
+import 'package:buddhistauction/Comment/list_replies.dart';
 import 'package:buddhistauction/Page/ReleaseBuddhist/first_page.dart';
 import 'package:buddhistauction/Page/ReleaseBuddhist/fourth_page.dart';
 import 'package:buddhistauction/Page/ReleaseBuddhist/second_page.dart';
@@ -7,6 +9,8 @@ import 'package:buddhistauction/Page/landingpage.dart';
 import 'package:buddhistauction/Page/loginpage.dart';
 import 'package:buddhistauction/Page/otppage.dart';
 import 'package:buddhistauction/Page/typelistitempage.dart';
+import 'package:buddhistauction/Profile/profile_user.dart';
+import 'package:buddhistauction/Provider/check_favorite_sharepref.dart';
 import 'package:buddhistauction/Provider/register_otp.dart';
 import 'package:buddhistauction/Provider/store_release_buddhist.dart';
 import 'package:buddhistauction/Provider/store_text_register.dart';
@@ -51,6 +55,8 @@ class MyApp extends StatelessWidget {
           ),
           ChangeNotifierProvider(
               create: (_) => StoreReleaseBuddhist()),
+          ChangeNotifierProvider(
+              create: (_) => Favorite()),
         ],
         child: MaterialApp(
           localizationsDelegates: [
@@ -62,15 +68,13 @@ class MyApp extends StatelessWidget {
             const Locale('en',"US"),
             const Locale('th',"TH"),
             const Locale('lo',"LA")
-
           ],
           debugShowCheckedModeBanner: false,
-          home: LandingPage(),
+          home: HomePage(),
           routes: {
             '/homepage': (context) => HomePage(),
             "/registerpage" : (context) => RegisterPage(),
             "/loginpage" : (context) => LoginPage(),
-
             '/detailpage': (context) => DetailPage(),
             '/otppage': (context) => OTPPage(),
             '/typelistitempage' : (context)=> TypeListItemPage(),
@@ -78,6 +82,9 @@ class MyApp extends StatelessWidget {
             "/second_page" : (context) => SecondPage(),
             "/third_page" : (context) => ThirdPage(),
             "/fourth_page" : (context) => FourthPage(),
+            "/profile_user" : (context) => ProfileUser(),
+            "/content_detail" : (context) => ContentDetail(),
+            "/listreplies" : (context) => ListReplies(),
           },
         ));
   }

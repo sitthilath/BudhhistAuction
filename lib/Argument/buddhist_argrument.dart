@@ -1,5 +1,5 @@
 import 'package:buddhistauction/Model/buddhist_detail.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class BuddhistArguments {
 

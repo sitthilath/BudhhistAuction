@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:buddhistauction/Argument/buddhist_agrument.dart';
+import 'package:buddhistauction/Argument/buddhist_argrument.dart';
 import 'package:buddhistauction/Argument/buddhist_type_agrument.dart';
 import 'package:buddhistauction/Filter/search_all.dart';
 import 'package:buddhistauction/Model/buddhist_detail.dart';
@@ -101,6 +101,7 @@ class _BottomSearchState extends State<BottomSearch>
   @override
   Widget build(BuildContext context) {
     super.build(context);
+    final orientation = MediaQuery.of(context).orientation;
 
     return Scaffold(
       body: Container(
@@ -296,7 +297,6 @@ class _BottomSearchState extends State<BottomSearch>
   Widget buddhistType() {
     return Container(
       height: MediaQuery.of(context).size.height *0.15,
-
       child: Row(
         children: [
           Expanded(

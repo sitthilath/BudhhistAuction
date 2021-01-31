@@ -1,8 +1,10 @@
 
-import 'package:buddhistauction/Argument/buddhist_agrument.dart';
+import 'package:buddhistauction/Argument/buddhist_argrument.dart';
 import 'package:buddhistauction/Model/buddhist_detail.dart';
+import 'package:buddhistauction/Provider/check_favorite_sharepref.dart';
 import 'package:buddhistauction/Provider/provider_sharepreference_showbottom.dart';
 import 'package:buddhistauction/const_api.dart';
+import 'package:favorite_button/favorite_button.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
@@ -71,12 +73,32 @@ class _DetailPageState extends State<DetailPage> {
                     pagination: SwiperPagination(),
                   )),
               actions: [
-                IconButton(
-                  icon: Icon(Icons.shopping_basket,
-                      color: Colors.white, size: 30),
-                  onPressed: () {
-                    print("kod leo");
-                  },
+                // IconButton(
+                //   icon: Icon(Icons.shopping_basket,
+                //       color: Colors.white, size: 30),
+                //   onPressed: () {
+                //     print("kod leo");
+                //   },
+                // ),
+                Consumer<Favorite>(
+                    builder: (context, value, child){
+                      return FavoriteButton(
+
+                        isFavorite: value.checkFavorite,
+                        valueChanged: (_isFavorite) {
+                          if(_isFavorite ==true){
+                            print("ok");
+
+                          }else{
+                            print("not");
+
+                          }
+                          value.toggleFavorite();
+                          print('Is Favorite : $_isFavorite');
+                        },
+                      );
+                    }
+
                 ),
               ],
               leading: IconButton(
@@ -123,7 +145,7 @@ class _DetailPageState extends State<DetailPage> {
                               return Column(
                                 children: [Text('${currencyFormat.format(maxPrice)}',
                                   style: TextStyle(
-                                      fontWeight: FontWeight.bold, color: Colors.grey),
+                                      fontWeight: FontWeight.bold, color: Colors.grey,fontSize: 30,fontFamily: 'boonhome'),
 
                                 )],
                               );
@@ -401,7 +423,10 @@ class _DetailPageState extends State<DetailPage> {
                           )),
                       Divider(),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pushNamed(context, '/content_detail',arguments: BuddhistArguments(buddhistItem: args.buddhistItem,idx: args.idx));
+
+                        },
                         child: Row(
                           children: [
                             Icon(Icons.brightness_1),
@@ -677,7 +702,7 @@ class _BottomSheetItemState extends State<BottomSheetItem> {
   final String token = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiYjUwMDAyOTFhYTZhNmFmMzA0YjA2NjRhMjJkNjdkNmM0MDlhNzEyNGU4YWVkNjE1ODE1MTA3ZDgxN2VjNjczNzJhOTkwNGRiOTUxNWNkNTYiLCJpYXQiOjE2MDc2NzI0NTIsIm5iZiI6MTYwNzY3MjQ1MiwiZXhwIjoxNjM5MjA4NDUyLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.cDsEdLH0wtbkxxmOuEJbp4NxdAD-74aknFxmz6oLJy0SOqXkNvGGWQLUmJZ5Ss9H7jmpekmleNrVMPGjrrzanbu-4WT3kjXoSeKfOV0vD--0_DpqixnRI65kVD5coNUpELsoBiRXHNhhfyAvcZxOMuO55YCpk_uMj2m1i9LR37hF4mGvr4Uoc-SmxE60s_5NrAWv9P-gQlGsv95NSAJU7INqYFDYuxtoTgmR9BwPqGoJDEngfafgBPU0OgBPqn1JCKFb1yQAxsi_q4tSryGJe214mnKLQExlZemAm5cdD7DjJzWGZTbvjY1ZdlvuA-wLEtogpO0zp_A6elZayXseX0dQ-DpXfYtDJl0au6UiZrHbwxslpCT_068Blts8JVIDFQTQMdxyO8bTlHD-8wmiivqiWtD4R_RREcZ4cxUX8Y6HWlKnMSzVmIr0K3fIPtU2FMR0jJEGiLQREBNG7kjBhzgd19fymqqOTlspj4wIP733a5eyh_klqZFgBv_cBq61hrQkthC6tc-dEHdfz7jcHmY793RkrVBTb6uwSHEPYToXeUB3bfpgtkKJwgJaRly-D3ZFJOFeA2ZQ-Jun8j2520ZFW8GUYb8PthEz0z4-P_NneOezT9Ouhvbp9ITpCgJZN3SzCrTi8QfLqEhjP91eP-XQOFW6ORa5xR8lw6VxHOw";
   void insertData(int price,int id){
 
-    String url = "http://192.168.123.126:8000/api/bidding/"+id.toString();
+    String url = "$API_URL/bidding/"+id.toString();
     http.post( url,
 
         headers: {        'Accept' : 'application/json; charset=UTF-8',
@@ -702,6 +727,37 @@ class _BottomSheetItemState extends State<BottomSheetItem> {
   }
 
   var maxPrice;
+
+
+  void showAlertDialog(BuildContext context) {
+    // set up the buttons
+    Widget cancelButton = FlatButton(
+      child: Text("ຍົກເລີກ"),
+      onPressed:  () {},
+    );
+    Widget continueButton = FlatButton(
+      child: Text("ຕົກລົງ"),
+      onPressed:  () {
+        insertData(int.parse(priceController.text),widget.buddhistList[widget.index].id);
+      },
+    );
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("ປະມູນ"),
+      content: Text("ທ່ານຕ້ອງການປະມູນ ຫຼື ບໍ່?"),
+      actions: [
+        cancelButton,
+        continueButton,
+      ],
+    );
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -760,8 +816,9 @@ class _BottomSheetItemState extends State<BottomSheetItem> {
                         fontWeight:
                         FontWeight.bold),
                   ),
-                  onPressed: () => {
-                    insertData(int.parse(priceController.text),widget.buddhistList[widget.index].id)
+                  onPressed: () {
+
+                    showAlertDialog(context);
 
                   },
                 ),

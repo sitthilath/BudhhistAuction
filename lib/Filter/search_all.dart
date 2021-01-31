@@ -1,5 +1,5 @@
 
-import 'package:buddhistauction/Argument/buddhist_agrument.dart';
+import 'package:buddhistauction/Argument/buddhist_argrument.dart';
 import 'package:buddhistauction/Model/buddhist_detail.dart';
 import 'package:buddhistauction/const_api.dart';
 import 'package:firebase_database/firebase_database.dart';

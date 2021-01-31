@@ -12,7 +12,6 @@ import 'package:provider/provider.dart';
 
 class AuthService extends ChangeNotifier{
 
-
   ///PushTokenFirebasebToLaravel
   void registerUser(String name, String surname, String phoneNumber,
       String firebaseToken, String password,BuildContext context) {
@@ -37,7 +36,7 @@ class AuthService extends ChangeNotifier{
 
       var tk = "Token:"+result['access_token'];
       debugPrint(tk, wrapWidth: 1024);
-     // print("Token:"+result['access_token']);
+     print("Token:"+result['access_token']);
 
       var token = result['access_token'];
       Provider.of<StoreToken>(context,listen:false).setTokens(token);

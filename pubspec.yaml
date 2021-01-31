@@ -40,10 +40,12 @@ dependencies:
   firebase_database: ^4.3.0
   firebase_core: ^0.5.2
   image_picker: ^0.6.6+5
-  fluttertoast: ^7.1.5
+  fluttertoast: ^7.1.4
   pin_code_fields: ^6.0.1
   date_time_picker: ^1.1.0
   google_fonts: ^0.3.5
+  favorite_button: ^0.0.3
+
 
 dev_dependencies:
   flutter_test:
